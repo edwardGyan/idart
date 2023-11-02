@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron" style="background-color:chocolate; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">
+    <h1>iDart</h1>
+    <p>Register</p>
+  </div>
+
+  <form method="POST" action="/">
+    {{ form.hidden_tag() }}
+
+  <div class="form-group">
+    {{ form.username_or_fullname.label(class="form-control-label") }}
+    {% if form.username_or_fullname.errors %}
+      {{ form.username_or_fullname(class="form-control is-invalid", type="text", placeholder="Jane Doe") }}
+      {% for error in form.username_or_fullname.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    {% else %}
+      {{ form.username_or_fullname(class="form-control", type="text", placeholder="Jane Doe") }}
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ form.password.label(class="form-control-label") }}
+    {% if form.password.errors %}
+      {{ form.password(class="form-control is-invalid", type="text", placeholder="********") }}
+      {% for error in form.password.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    {% else %}
+      {{ form.password(class="form-control", type="password", placeholder="**********") }}
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ form.confirm_password.label(class="form-control-label") }}
+    {% if form.confirm_password.errors %}
+      {{ form.confirm_password(class="form-control is-invalid", type="password", placeholder="********") }}
+      {% for error in form.confirm_password.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    {% else %}
+      {{ form.confirm_password(class="form-control", type="password", placeholder="**********") }}
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ form.email.label(class="form-control-label") }}
+    {% if form.email.errors %}
+      {{ form.email(class="form-control is-invalid", type="text", placeholder="opana@gmail.com") }}
+      {% for error in form.email.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    {% else %}
+      {{ form.email(class="form-control", type="text", placeholder="opana@gmail.com") }}
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ form.organization.label(class="form-control-label") }}
+    {% if form.organization.errors %}
+      {{ form.organization(class="form-control is-invalid", type="text", placeholder="Organization Name") }}
+      {% for error in form.organization.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    {% else %}
+      {{ form.organization(class="form-control", type="text", placeholder="Organization Name") }}
+      <div class="alert alert-warning" role="alert">
+        If you're joining a new organization, make sure the organization name is correct. If you're creating a new organization, simply enter the new name. 
+      </div>
+    {% endif %}
+  </div>
+
+  {{ form.submit(class="btn btn-outline-info") }}
+      
+      <p>Already have an account? <a href="{{url_for('login')}}">Log In</a></p>
+    </form>
+
+
+
+{% endblock %}

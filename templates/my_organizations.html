@@ -1,0 +1,19 @@
+<!-- issues.html
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>My Organizations</h1>
+  <div class="org-cards">
+    {% for org in current_user.my_organizations %}
+      <div class="org-card">
+        <h2>{{ org.name }}</h2>
+        <div class="org-actions">
+            <button type="button" class="btn btn-lg btn-primary" disabled>Unsubscribe from Organization</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+ -->

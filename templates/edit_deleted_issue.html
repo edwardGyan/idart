@@ -1,0 +1,24 @@
+<!-- edit_issue.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron" style="background-color:chocolate; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">
+  <h1>Edit issue </h1>
+  </div>
+  <form method="POST" action="{{ url_for('edit_deleted_issue', deleted_issue_id=deleted_issue.id) }}">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value="{{ deleted_issue.title }}" required>
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required>{{ deleted_issue.description }}</textarea>
+    </div>
+    <div>
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" value="{{ deleted_issue.role }}">
+    </div>
+    <button type="submit">Save and Reopen Issue</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron" style="background-color:chocolate; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">
+    <h1>Dashboard</h1>
+    <p>Your recent issues...</p>
+    </div>
+    
+
+    <div class="card">
+      <div class="card-header" style="background-color: gray;">
+        <h3 >Issues:</h3>
+      </div>
+      <div class="card-body">
+        {% if issues %}
+          <ul class="list-group">
+            {% for issue in issues %}
+              <li class="list-group-item">
+                <h4>{{ issue.title }}</h4>
+                <p>{{ issue.description }}</p>
+                <p>Created on: {{ issue.date_created.strftime("%Y-%m-%d") }}</p>
+                <p><i> By: {{ issue.username_or_fullname }} </i></p>
+                <form method="POST" action="{{ url_for('delete_issue', issue_id=issue.id) }}">
+                  <button type="submit" class="btn btn-outline-danger"> <i class="fa-solid fa-check"></i>Mark as Solved</button>
+                  </form>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No issues found.</p>
+          <p> to create an issue, click the '+' icon, then add any problem your organization is facing for review.</p>
+          <a class="btn btn-outline-primary" href="{{url_for('create_issue')}}"><i class="fa-solid fa-plus"></i></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

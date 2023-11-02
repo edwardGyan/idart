@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron" style="background-color:chocolate; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">
+    <h1>My Darts</h1>
+</div>
+<div class="issue-cards">
+  <h3><u> Current Issues you've created. </u></h3>
+  
+    {% if current_user.issues %}
+        {% for issue in current_user.issues %}
+            <div class="issue-card">
+                <h4>{{ issue.title }}</h4>
+                <p>{{ issue.description }}</p>
+                <p>Date Created: {{ issue.date_created.strftime('%Y-%m-%d') }}</p>
+                <p>Role: {{ issue.role }}</p>
+                <div class="issue-actions">
+                    <a href="{{ url_for('edit_issue', issue_id=issue.id) }}" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                </div>
+                <form method="POST" action="{{ url_for('delete_issue', issue_id=issue.id) }}">
+                  <button type="submit" class="btn btn-outline-danger"> <i class="fa-solid fa-check"></i>Mark as Solved</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <small>No current issues.</small>
+    {% endif %}
+    <hr>
+
+    <h3> <u> Solved Issues you created. </u></h3>
+    {% if current_user.deleted_issues %}
+    {% for deleted_issue in current_user.deleted_issues %}
+        
+        <div class="issue-card">
+            <h4>{{ deleted_issue.title }}</h4>
+            <p>{{ deleted_issue.description }}</p>
+            <p>Date Solved: {{ deleted_issue.date_created.strftime('%Y-%m-%d') }}</p>
+            <form action="{{ url_for('restore_deleted_issue', deleted_issue_id=deleted_issue.id) }}" method="POST" style="display:inline;">
+              <button type="submit"class="btn btn-outline-success"><i class="fa-solid fa-window-restore" ></i>Re-open Issue</button>
+            </form>
+            <a href="{{ url_for('edit_deleted_issue', deleted_issue_id=deleted_issue.id) }}" class="btn btn-outline-primary"><i class="fa-solid fa-file-pen"></i>Edit and Re-open issue</a>
+        </div>
+    {% endfor %}
+    {% else %}
+        <small>No solved issues you've created.</small>
+    {% endif %}
+    <hr>
+</div>
+{% endblock %}

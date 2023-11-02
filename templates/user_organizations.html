@@ -1,0 +1,19 @@
+<!-- user_organizations.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ user.name }}'s Organizations</h1>
+  {% if organizations %}
+    <ul>
+      {% for organization in organizations %}
+        <li>
+          <h3>{{ organization.name }}</h3>
+          
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No organizations found.</p>
+  {% endif %}
+{% endblock %}
