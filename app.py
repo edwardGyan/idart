@@ -16,14 +16,14 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://gxbennkbepbchm:268804ecedb60f2d85022a083fb9216241cceaf4f1be6da66313c47123e512da@ec2-54-234-13-16.compute-1.amazonaws.com:5432/d99qs7fp0gvv8u'
+if os.getenv('DATABASE_URL'):
+        app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy(app)
 admin = Admin()
 admin.init_app(app)
 bcrypt = Bcrypt(app)
-
-env_config = os.getenv("PROD_APP_SETTINGS", "config.DevelopmentConfig")
-app.config.from_object(env_config)
 
 
 
