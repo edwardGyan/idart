@@ -17,7 +17,7 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 if os.getenv('DATABASE_URL'):
-        app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://users_m6u9_user:JRQCGMGOJQwg8iaNSktxbs8NumI7hRBm@dpg-cl237ermgg9c73ebngng-a.oregon-postgres.render.com/users_m6u9"
+        app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://users_m6u9_user:JRQCGMGOJQwg8iaNSktxbs8NumI7hRBm@dpg-cl237ermgg9c73ebngng-a.oregon-postgres.render.com:5432/users_m6u9"
 else:
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy(app)
